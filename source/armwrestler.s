@@ -159,8 +159,9 @@ not_up:
 	tst 	r2,#0x80
 	beq 	not_down
 	add 	r3,r3,#1
-	cmp 	r3,#6
-	movgt 	r3,#6
+	// change from #6 to stub the last menu
+	cmp 	r3,#5
+	movgt 	r3,#5
 	movle 	r5,#1
 		
 not_down:
@@ -556,7 +557,7 @@ Menu:
 	ldr 	r0,[r5],#4
 	bl 	DrawText
 	add 	r4,r4,#8
-	cmp 	r4,#128
+	cmp 	r4,#120 // remove the v5 test (#128)
 	bne 	draw_menuitems
 
 	ldr 	r0,=szMarker
@@ -2412,13 +2413,16 @@ memVal:		.word 0
 palette:
 		.hword 0x0000,0x0300,0x0018,0x7fff,0x7318,0x0E1F
 
+
+// stub the armv5 tests here
+
 menuitems:	.word szArm1,szArm2,szArm3
 		.word szTmb1,szTmb2,szTmb3
-		.word szArm4
+//		.word szArm4 
 
 menulinks:	.word 0,2,4
 		.word 11,12,13
-		.word 5
+//		.word 5
 		
 jumptable: 	.word Test0,Test1,Test2,Test3
 	   	.word Test4,Test5,Test6,Test7
@@ -2550,7 +2554,7 @@ szArm3:		.asciz "ARM LDM/STM"
 szTmb1:		.asciz "THUMB ALU"
 szTmb2:		.asciz "THUMB LDR/STR"
 szTmb3:		.asciz "THUMB LDM/STM"
-szArm4:		.asciz "ARM V5TE"
+//szArm4:		.asciz "ARM V5TE"
 szMarker:	.asciz "`"
 szSelect:	.asciz "SELECT A TEST AND PRESS"
 
@@ -2565,7 +2569,7 @@ szLS6: 		.asciz   "LOAD TESTS PART 6"
 szLS7: 		.asciz   "LOAD TESTS PART 7"
 szLS8: 		.asciz   "LOAD TESTS PART 8"
 szLDM1:		.asciz 	"LDM/STM TESTS 1"
-szAV5:		.asciz  "ARM V5TE TESTS"
+//szAV5:		.asciz  "ARM V5TE TESTS"
 
 .global szSelect2
 .global szNext
